@@ -34,9 +34,16 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 15,
+        padding: 5,
+    },
+    graph: {
+        flex: 4,
+        backgroundColor: "green",
+    },
+    list: {
+        flex: 5,
+        backgroundColor: "yellow",
+        padding: 10,
     },
 });
 
@@ -67,28 +74,36 @@ export default function Home() {
 
     return (
         <View style={{ flex: 1, padding: 24 }}>
-            {isLoading ? (
-                <Text>Loading...</Text>
-            ) : (
-                <View
-                    style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <Text style={{ fontSize: 18, color: "green", textAlign: "center" }}>
-                        YY_Music
-                    </Text>
-                    <FlatList
-                    data={songs}
-                    keyExtractor={({ id }, index) => id}
-                    renderItem={({ item }) => (
-                    <Text>{item.song + " | " + item.artist + " | " + item.rating + " | " + item.username}</Text>
-                    )}
-                />
-                </View>
-            )}
+            <View style={styles.header}>
+                <TopBar/>
+            </View>    
+            <View style={styles.graph}>
+                <Text>Graph</Text>
+            </View>
+            <View style={styles.list}>
+                {isLoading ? (
+                    <Text>Loading...</Text>
+                ) : (
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Text style={{ fontSize: 18, color: "green", textAlign: "center" }}>
+                            YY_Music
+                        </Text>
+                        <FlatList
+                        data={songs}
+                        keyExtractor={({ id }, index) => id}
+                        renderItem={({ item }) => (
+                        <Text>{item.song + " | " + item.artist + " | " + item.rating + " | " + item.username}</Text>
+                        )}
+                    />
+                    </View>
+                )}
+            </View>
         </View>
     );
 }

@@ -11,7 +11,7 @@ function Login() {
 
 const styles = StyleSheet.create({
     login: {
-        padding: 15,
+        padding: 5,
     },
 });
 
