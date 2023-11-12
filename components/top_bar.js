@@ -6,11 +6,26 @@ import Logo from './logo';
 const TopBar = () => {
     return (
         <View>
-            <Text>TopBar</Text>
-            <Logo/>
-            <Login/>
+            <Logo style={styles.logo}/>
+            <View style={styles.gap}/> 
+            <Login style={styles.login}/>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    topbar: {
+        flexDirection: "column",
+    },
+    logo: {
+        flex: 1,
+    },
+    gap: {
+        flex: 5,
+    },
+    login: {
+        flex: 1,
+    }
+});
 
 export default TopBar;
