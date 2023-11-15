@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity } from "react-native";
 import TopBar from './top_bar';
-
+import AddSong from "./add_song";
 
 // Data: Fetch data from the backend
 // Basic UI: 
@@ -34,16 +34,14 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         backgroundColor: "#fff",
-        padding: 5,
     },
-    graph: {
-        flex: 4,
+    main: {
+        flex: 10,
         backgroundColor: "green",
     },
     list: {
-        flex: 5,
+        flex: 9,
         backgroundColor: "yellow",
-        padding: 10,
     },
 });
 
@@ -77,8 +75,8 @@ export default function Home() {
             <View style={styles.header}>
                 <TopBar/>
             </View>    
-            <View style={styles.graph}>
-                <Text>Graph</Text>
+            <View style={styles.main}>
+                <AddSong/>
             </View>
             <View style={styles.list}>
                 {isLoading ? (
@@ -106,4 +104,10 @@ export default function Home() {
             </View>
         </View>
     );
+
+    // return(
+    //     <View>
+    //         <AddSong/>
+    //     </View>
+    // );
 }

@@ -5,7 +5,7 @@ import Logo from './logo';
 
 const TopBar = () => {
     return (
-        <View>
+        <View style={styles.topbar}>
             <Logo style={styles.logo}/>
             <View style={styles.gap}/> 
             <Login style={styles.login}/>
@@ -15,17 +15,17 @@ const TopBar = () => {
 
 const styles = StyleSheet.create({
     topbar: {
-        flexDirection: "column",
+        flexDirection: "row",
     },
     logo: {
         flex: 1,
     },
     gap: {
-        flex: 5,
+        flex: 1,
     },
     login: {
         flex: 1,
-    }
+    },
 });
 
 export default TopBar;
