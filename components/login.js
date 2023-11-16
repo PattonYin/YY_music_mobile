@@ -30,6 +30,7 @@ export default function Login() {
                 setUsername({localUsername});
                 setLogin(true);
                 setSection("Create Review");
+                alert("login success");
             } else {
                 alert("Login failed," + data.message);
             }
