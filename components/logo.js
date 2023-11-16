@@ -11,7 +11,7 @@ function Logo() {
 
 const styles = StyleSheet.create({
     logo: {
-        padding: 15,
+        padding: 5,
     },
 });
 
