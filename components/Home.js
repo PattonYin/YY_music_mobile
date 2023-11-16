@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { Text, View, StyleSheet, FlatList, PanResponder} from "react-native";
 import TopBar from './top_bar';
 import AddSong from "./add_song";
+import { useAuth } from "../AuthContext";
+import Login from "./login";
 
 // Data: Fetch data from the backend
 // Basic UI: 
@@ -33,22 +35,43 @@ import AddSong from "./add_song";
 const styles = StyleSheet.create({
     header: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#95cef0",
+        borderRadius: 10,
+        
     },
     main: {
         flex: 10,
         backgroundColor: "green",
+        borderRadius: 10,
     },
     list: {
         flex: 9,
         backgroundColor: "yellow",
+        borderRadius: 10,
     },
 });
 
 export default function Home() {
     const [isLoading, setLoading] = useState(true);
     const [songs, setSongs] = useState([]);
+    const { currentSection, setSection } = useAuth();
 
+    const panResponder = useRef(PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onPanResponderMove: (event, gestureState) => {
+            const { dx } = gestureState;
+
+            if (dx < -40 && currentSection == "Create Review") { // Assuming -40 as the threshold for a left swipe
+                // Change section logic
+                setCurrentSection('Graph'); // Change to the section you want
+            } 
+
+            if (dx < -40 && currentSection == "Graph") {
+                // Change section logic
+                setCurrentSection('Create Review'); // Change to the section you want
+            }
+        },
+    })).current;
 
     useEffect(() => {
         fetch("http://localhost/YY_Music_JS/backend/index.php?action=getRatings", {
@@ -67,16 +90,18 @@ export default function Home() {
           alert("Failed due to a network or server issue.");
         })
         .finally(() => setLoading(false));
+        
       }, []);
       
-
     return (
         <View style={{ flex: 1, padding: 24 }}>
             <View style={styles.header}>
                 <TopBar/>
             </View>    
-            <View style={styles.main}>
-                <AddSong/>
+            <View {...panResponder.panHandlers} style={styles.main}>
+                {/* {(currentSection == "Create Review") ? <AddSong/> : <Text>Graph</Text>} */}
+                {/* <AddSong/> */}
+                <Login/>
             </View>
             <View style={styles.list}>
                 {isLoading ? (

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Text, View, StyleSheet } from "react-native";
-import Login from './login';
+import { useAuth } from '../AuthContext';
 import Logo from './logo';
 
 const TopBar = () => {
+    const { username, isLogin } = useAuth();
+
     return (
         <View style={styles.topbar}>
             <Logo style={styles.logo}/>
             <View style={styles.gap}/> 
-            <Login style={styles.login}/>
+            {isLogin ? <Text>Welcome, {username}</Text> : <Text style={styles.login}>ClickHere to login</Text>}
         </View>
     );
 };
