@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-nativ
 import { useAuth } from '../AuthContext';
 
 export default function Login() {
-    const { username, setUsername, isLogin, setLogin } = useAuth();
+    const { setUsername, setLogin, setSection } = useAuth();
     const [localUsername, setLocalUsername] = useState('');
     const [localPassword, setLocalPassword] = useState('');
 
@@ -18,7 +18,7 @@ export default function Login() {
             const response = await fetch('http://localhost/YY_Music_JS/backend/index.php?action=login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ localUsername, localPassword })
+                body: JSON.stringify({ 'username': localUsername, 'password': localPassword })
             });
 
             if (!response.ok) {
@@ -27,16 +27,15 @@ export default function Login() {
 
             const data = await response.json();
             if (data.success) {
-                setUsername({
-                    Name: username});
+                setUsername({localUsername});
                 setLogin(true);
-                // Jumping to the Create song Section
+                setSection("Create Review");
             } else {
                 alert("Login failed," + data.message);
             }
 
         } catch (error) {
-            alert("Login failed due to a network or server issue.");
+            alert("Login failed due to a network or server issue.", error);
         }
     };
 
@@ -60,41 +59,6 @@ export default function Login() {
             </TouchableOpacity>
         </View>
     );
-    //     isLogin 
-    //     ? 
-    //         (<div>
-    //             <button onClick={() => {window.location.replace('/Createsong')}}>create review</button>
-    //             <button onClick={() => {
-    //                 sessionStorage.removeItem('isLogin');
-    //                 //make sure to remove the username as well
-    //                 sessionStorage.removeItem('username');
-    //                 window.location.reload();
-    //             }}>
-    //                 Logout
-    //             </button>
-    //         </div>)
-    //     :   
-    //         (<div>
-    //             <form onSubmit={handleSubmit}>
-    //             <input 
-    //                 value={username}
-    //                 onChange={(e) => setUsername(e.target.value)}
-    //                 placeholder="Username" 
-    //                 required
-    //             />
-    //             <input 
-    //                 type="password"
-    //                 value={password}
-    //                 onChange={(e) => setPassword(e.target.value)}
-    //                 placeholder="Password" 
-    //                 required
-    //             />
-    //             <button type="submit">Login</button>
-    //             <Link to="/register"><button type="button">Register</button></Link>
-
-    //             </form>
-    //         </div>)
-    // );
 }
 
 const styles = StyleSheet.create({

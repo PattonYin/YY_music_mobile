@@ -55,6 +55,7 @@ export default function Home() {
     const [isLoading, setLoading] = useState(true);
     const [songs, setSongs] = useState([]);
     const { currentSection, setSection } = useAuth();
+    const [toberender, setrender ] = useState(currentSection);
 
     const panResponder = useRef(PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -72,6 +73,32 @@ export default function Home() {
             }
         },
     })).current;
+
+    const renderContent = () => {
+        switch(currentSection) {
+            case "Create Review":
+                return <AddSong/>;
+            case "Graph":
+                return <Text>Graph</Text>;
+            case "Login":
+                return <Login/>;
+            default:
+                return <AddSong/>
+        }
+    }
+
+    useEffect(() => {  
+        switch(currentSection) {
+            case "Create Review":
+                setrender(<AddSong/>);
+            case "Graph":
+                setrender(<Text>Graph</Text>);
+            case "Login":
+                setrender(<Login/>);
+            default:
+                setrender(<AddSong/>);
+        }
+    }, [currentSection]);
 
     useEffect(() => {
         fetch("http://localhost/YY_Music_JS/backend/index.php?action=getRatings", {
@@ -99,8 +126,6 @@ export default function Home() {
                 <TopBar/>
             </View>    
             <View {...panResponder.panHandlers} style={styles.main}>
-                {/* {(currentSection == "Create Review") ? <AddSong/> : <Text>Graph</Text>} */}
-                {/* <AddSong/> */}
                 <Login/>
             </View>
             <View style={styles.list}>
