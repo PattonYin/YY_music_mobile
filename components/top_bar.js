@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { useAuth } from '../AuthContext';
-import Logo from './logo';
+import { useAuth } from "../AuthContext";
+import Logo from "./logo";
 
 const TopBar = () => {
     const { username, setUsername, isLogin, setLogin, setSection } = useAuth();
@@ -10,7 +10,7 @@ const TopBar = () => {
         setUsername(null);
         setLogin(false);
         setSection('Login');
-    };
+    }
 
     return (
         <View style={styles.topbar}>
