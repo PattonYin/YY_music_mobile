@@ -4,27 +4,27 @@ import { useAuth } from '../AuthContext';
 import Logo from './logo';
 
 const TopBar = () => {
-    const { username, setUsername, isLogin, setLogin ,setSection } = useAuth();
+    const { username, setUsername, isLogin, setLogin, setSection } = useAuth();
 
     const handleLogout = () => {
         setUsername(null);
         setLogin(false);
         setSection('Login');
-    }
+    };
 
     return (
         <View style={styles.topbar}>
-            <Logo style={styles.logo}/>
-            <View style={styles.gap}/> 
-            {isLogin ? 
+            <Logo style={styles.logo} />
+            <View style={styles.gap} />
+            {isLogin ?
                 <View>
-                    <Text style={styles.login}>Welcome, {username}</Text> 
+                    <Text style={styles.login}>Welcome, {username}</Text>
                     <TouchableOpacity style={styles.button} onPress={handleLogout}>
                         <Text style={styles.buttonText}> Logout </Text>
                     </TouchableOpacity>
                 </View>
-                : 
-                <TouchableOpacity style={styles.button} onPress={() => {setSection('Register')}}>
+                :
+                <TouchableOpacity style={styles.button} onPress={() => { setSection('Register') }}>
                     <Text style={styles.buttonText}> Register </Text>
                 </TouchableOpacity>}
         </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#4a90e2",
         paddingHorizontal: 2,
         borderRadius: 2,
-      },
+    },
     buttonText: {
         color: "#fff",
         fontSize: 10,
