@@ -23,7 +23,7 @@ export default function UpdateSong() {
       setRating(updateInfo.rating);
       setSongUsername(updateInfo.username);
       setSongId(updateInfo.id);
-      console.log("updated");
+      console.log("song info updated");
     }
   }, [updateInfo]);
 

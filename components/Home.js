@@ -35,6 +35,42 @@ import UpdateSong from "./edit_song";
 // 2. Components
 // 3. navigation logic
 // 4. Login logout logica
+
+export default function Home() {
+  const [isLoading, setLoading] = useState(true);
+  const [songs, setSongs] = useState([]);
+  const { currentSection, setSection, reload, setReload } = useAuth();
+
+  function renderSection() {
+    switch (currentSection) {
+      case "Create Review":
+        return <AddSong />;
+      case "Graph":
+        return <Text>Graph</Text>;
+      case "Login":
+        return <Login />;
+      case "Register":
+        return <Register />;
+      case "updateSong":
+        return <UpdateSong />;
+      default:
+        return <Login />;
+    }
+  }
+
+  return (
+    <View style={{ flex: 1, padding: 24 }}>
+      <View style={styles.header}>
+        <TopBar />
+      </View>
+      <View style={styles.main}>{renderSection()}</View>
+      <View style={styles.list}>
+        <ViewSong />
+      </View>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   header: {
     height: 40,
@@ -53,46 +89,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-export default function Home() {
-  const [isLoading, setLoading] = useState(true);
-  const [songs, setSongs] = useState([]);
-  const { currentSection, setSection, reload, setReload } = useAuth();
-
-  function renderSection() {
-    switch (currentSection) {
-      case "Create Review":
-        return <AddSong />;
-        break;
-      case "Graph":
-        return <Text>Graph</Text>;
-        break;
-      case "Login":
-        return <Login />;
-        break;
-      case "Register":
-        return <Register />;
-        break;
-      case "updateSong":
-        return <UpdateSong />;
-        break;
-      default:
-        return <Login />;
-        break;
-    }
-  }
-
-  return (
-    <View style={{ flex: 1, padding: 24 }}>
-      <View style={styles.header}>
-        <TopBar />
-      </View>
-      <View style={styles.main}>
-        {renderSection()}
-      </View>
-      <View style={styles.list}>
-        <ViewSong />
-      </View>
-    </View>
-  );
-}
