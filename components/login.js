@@ -15,7 +15,7 @@ export default function Login() {
                 return;
             }
 
-            const response = await fetch('http://localhost/YY_Music_JS/backend/index.php?action=login', {
+            const response = await fetch('http://172.21.48.189/YY_Music_JS/backend/index.php?action=login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 'username': localUsername, 'password': localPassword })
