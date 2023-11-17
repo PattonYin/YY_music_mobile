@@ -5,6 +5,9 @@ import AddSong from "./add_song";
 import { useAuth } from "../AuthContext";
 import Login from "./login";
 import Register from "./register";
+import { TouchableOpacity } from "react-native-web";
+import ViewSong from "./view_song";
+import UpdateSong from "./edit_song";
 
 // Data: Fetch data from the backend
 // Basic UI:
@@ -54,44 +57,6 @@ export default function Home() {
   const [isLoading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
   const { currentSection, setSection, reload, setreload } = useAuth();
-  // const [toberender, setrender ] = useState(currentSection);
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (event, gestureState) => {
-        const { dx } = gestureState;
-
-        if (dx < -40 && currentSection == "Create Review") {
-          // Assuming -40 as the threshold for a left swipe
-          // Change section logic
-          setCurrentSection("Graph"); // Change to the section you want
-        }
-
-        if (dx < -40 && currentSection == "Graph") {
-          // Change section logic
-          setCurrentSection("Create Review"); // Change to the section you want
-        }
-      },
-    })
-  ).current;
-
-  // useEffect(() => {
-  //     switch(currentSection) {
-  //         case "Create Review":
-  //             setrender(<AddSong/>);
-  //             break;
-  //         case "Graph":
-  //             setrender(<Text>Graph</Text>);
-  //             break;
-  //         case "Login":
-  //             setrender(<Login/>);
-  //             break;
-  //         default:
-  //             setrender(<Login/>);
-  //             break;
-  //     }
-  // }, [currentSection]);
 
   function renderSection() {
     switch (currentSection) {
@@ -107,78 +72,25 @@ export default function Home() {
       case "Register":
         return <Register />;
         break;
+      case "updateSong":
+        return <UpdateSong />;
+        break;
       default:
         return <Login />;
         break;
     }
   }
 
-  useEffect(() => {
-    fetch(
-      "http://172.21.48.189/YY_Music_JS/backend/index.php?action=getRatings",
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setSongs(data))
-      .catch((error) => {
-        console.error(
-          "There was a problem with the fetch operation:",
-          error.message
-        );
-        alert("Failed due to a network or server issue.");
-      })
-      .finally(() => {
-        setLoading(false);
-        setreload(false);
-      });
-  }, [reload]);
-
   return (
     <View style={{ flex: 1, padding: 24 }}>
       <View style={styles.header}>
         <TopBar />
       </View>
-      <View {...panResponder.panHandlers} style={styles.main}>
+      <View style={styles.main}>
         {renderSection()}
       </View>
       <View style={styles.list}>
-        {isLoading ? (
-          <Text>Loading...</Text>
-        ) : (
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={{ fontSize: 18, color: "green", textAlign: "center" }}>
-              YY_Music
-            </Text>
-            <FlatList
-              data={songs}
-              renderItem={({ item }) => (
-                <Text>
-                  {item.song +
-                    " | " +
-                    item.artist +
-                    " | " +
-                    item.rating +
-                    " | " +
-                    item.username}
-                </Text>
-              )}
-            />
-          </View>
-        )}
+        <ViewSong/>
       </View>
     </View>
   );
