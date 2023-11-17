@@ -12,7 +12,7 @@ export default function AddSong() {
   const [song_artist, setArtistname] = useState("");
   const [song_name, setSongname] = useState("");
   const [song_rating, setRating] = useState("");
-  const { username, setReload } = useAuth();
+  const { username, setReload, setSection } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,6 +58,7 @@ export default function AddSong() {
         setSongname("");
         setArtistname("");
         setRating("");
+        setSection("viewSong");
       } else {
         console.log(data.message);
         alert("Create failed, avoid duplicate review");
@@ -92,6 +93,9 @@ export default function AddSong() {
       />
       <TouchableOpacity onPress={handleSubmit}>
         <Text>Submit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setSection("viewSong")}>
+        <Text>Back to Lobby</Text>
       </TouchableOpacity>
     </View>
   );

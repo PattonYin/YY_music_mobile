@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useAuth } from "../AuthContext";
+import { TouchableHighlight } from "react-native-web";
 
 export default function Login() {
   const { setUsername, setLogin, setSection } = useAuth();
@@ -42,7 +43,7 @@ export default function Login() {
       if (data.success) {
         setUsername(localUsername);
         setLogin(true);
-        setSection("Create Review");
+        setSection("viewSong");
         setMessage("login success");
       } else {
         setMessage("Login failed," + data.message);
@@ -70,6 +71,15 @@ export default function Login() {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+
+      <Text
+        onPress={() => {
+          setSection("viewSong");
+        }}
+      >
+        Click here to check the reviews without loggin in
+      </Text>
+
       {message !== "" && <Text style={styles.message}>{message}</Text>}
     </View>
   );

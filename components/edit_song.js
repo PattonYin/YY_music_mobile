@@ -58,7 +58,7 @@ export default function UpdateSong() {
         console.log("Update success");
         setReload((prev) => !prev);
         setUpdate(null);
-        setSection("Create Review");
+        setSection("viewSong");
       } else {
         console.log(data.message);
         alert("Update fail failed");
@@ -88,11 +88,11 @@ export default function UpdateSong() {
         setReload((prev) => !prev);
         setUpdate(null);
         alert("Review deteled");
-        setSection("Create Review");
+        setSection("viewSong");
       } else {
         alert("delete failed, you can only delete your own review");
         setUpdate(null);
-        setSection("Create Review");
+        setSection("viewSong");
       }
     } catch (error) {
       console.error(
@@ -105,45 +105,53 @@ export default function UpdateSong() {
   };
 
   return (
-    <View>
-      <Text>Update Review</Text>
-      <Text>Here you can update your review.</Text>
-      <Text>Artist:</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Update Review</Text>
+      <Text style={styles.subHeader}>Here you can update your review.</Text>
+
+      <Text style={styles.label}>Artist:</Text>
       <TextInput
+        style={styles.input}
         value={song_artist}
-        placeholder="artist"
+        placeholder="Enter artist name"
         onChangeText={setArtistname}
       />
-      <Text>Song:</Text>
+
+      <Text style={styles.label}>Song:</Text>
       <TextInput
+        style={styles.input}
         value={song_name}
-        placeholder="song_name"
+        placeholder="Enter song name"
         onChangeText={setSongname}
       />
-      <Text>Rating:</Text>
+
+      <Text style={styles.label}>Rating:</Text>
       <TextInput
+        style={styles.input}
         keyboardType="numeric"
         value={song_rating.toString()}
+        placeholder="Enter rating"
         onChangeText={setRating}
-        maxLength={1} // Assuming rating is a single digit
+        maxLength={1}
       />
-      <TouchableOpacity onPress={handleSubmit}>
-        <Text>Submit</Text>
+
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
-      {song_username == username ? (
-        <TouchableOpacity onPress={handleDelete}>
-          <Text>Delete</Text>
+
+      {song_username === username && (
+        <TouchableOpacity style={styles.button} onPress={handleDelete}>
+          <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
-      ) : (
-        <View></View>
       )}
 
       <TouchableOpacity
+        style={styles.button}
         onPress={() => {
-          setSection("Create Review");
+          setSection("viewSong");
         }}
       >
-        <Text>Back to Lobby</Text>
+        <Text style={styles.buttonText}>Back to Lobby</Text>
       </TouchableOpacity>
     </View>
   );
@@ -153,9 +161,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "left",
-    justifyContent: "left",
-    paddingBottom: 20,
-    paddingTop: 20,
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  subHeader: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "grey",
+    borderRadius: 5,
+    padding: 12,
+    marginBottom: 16,
+    fontSize: 16,
+  },
+  button: {
+    backgroundColor: "#007bff",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "500",
   },
 });

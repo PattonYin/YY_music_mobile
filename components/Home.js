@@ -53,8 +53,10 @@ export default function Home() {
         return <Register />;
       case "updateSong":
         return <UpdateSong />;
+      case "viewSong":
+        return <ViewSong />;
       default:
-        return <Login />;
+        return <ViewSong />;
     }
   }
 
@@ -64,9 +66,9 @@ export default function Home() {
         <TopBar />
       </View>
       <View style={styles.main}>{renderSection()}</View>
-      <View style={styles.list}>
+      {/* <View style={styles.list}>
         <ViewSong />
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -76,16 +78,19 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: "#95cef0",
     borderRadius: 10,
+    width: 320,
   },
   main: {
     height: 380,
     backgroundColor: "#fff",
     borderRadius: 10,
+    width: 320,
   },
   list: {
     flex: 1,
     backgroundColor: "#a9bccc",
     borderRadius: 10,
     padding: 10,
+    width: 320,
   },
 });

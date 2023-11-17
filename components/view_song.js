@@ -59,6 +59,9 @@ export default function ViewSong() {
       <Text style={{ fontSize: 18, color: "green", textAlign: "center" }}>
         YY_Music
       </Text>
+      <TouchableOpacity onPress={() => setSection("Create Review")}>
+        <Text>Add Song</Text>
+      </TouchableOpacity>
       <FlatList
         data={songs}
         keyExtractor={(item) => item.id.toString()}
