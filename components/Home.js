@@ -34,64 +34,27 @@ import Register from "./register";
 // 4. Login logout logica
 const styles = StyleSheet.create({
   header: {
-    flex: 1,
+    height: 40,
     backgroundColor: "#95cef0",
     borderRadius: 10,
   },
   main: {
-    flex: 10,
-    backgroundColor: "#f2e1a5",
+    height: 380,
+    backgroundColor: "#fff",
     borderRadius: 10,
   },
   list: {
-    flex: 9,
+    flex: 1,
     backgroundColor: "#a9bccc",
     borderRadius: 10,
+    padding: 10,
   },
 });
 
 export default function Home() {
   const [isLoading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
-  const { currentSection, setSection, reload, setreload } = useAuth();
-  // const [toberender, setrender ] = useState(currentSection);
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (event, gestureState) => {
-        const { dx } = gestureState;
-
-        if (dx < -40 && currentSection == "Create Review") {
-          // Assuming -40 as the threshold for a left swipe
-          // Change section logic
-          setCurrentSection("Graph"); // Change to the section you want
-        }
-
-        if (dx < -40 && currentSection == "Graph") {
-          // Change section logic
-          setCurrentSection("Create Review"); // Change to the section you want
-        }
-      },
-    })
-  ).current;
-
-  // useEffect(() => {
-  //     switch(currentSection) {
-  //         case "Create Review":
-  //             setrender(<AddSong/>);
-  //             break;
-  //         case "Graph":
-  //             setrender(<Text>Graph</Text>);
-  //             break;
-  //         case "Login":
-  //             setrender(<Login/>);
-  //             break;
-  //         default:
-  //             setrender(<Login/>);
-  //             break;
-  //     }
-  // }, [currentSection]);
+  const { currentSection, setSection, reload, setReload } = useAuth();
 
   function renderSection() {
     switch (currentSection) {
@@ -137,7 +100,7 @@ export default function Home() {
       })
       .finally(() => {
         setLoading(false);
-        setreload(false);
+        setReload(false);
       });
   }, [reload]);
 
@@ -146,9 +109,7 @@ export default function Home() {
       <View style={styles.header}>
         <TopBar />
       </View>
-      <View {...panResponder.panHandlers} style={styles.main}>
-        {renderSection()}
-      </View>
+      <View style={styles.main}>{renderSection()}</View>
       <View style={styles.list}>
         {isLoading ? (
           <Text>Loading...</Text>

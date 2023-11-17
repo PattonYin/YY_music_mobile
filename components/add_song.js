@@ -12,13 +12,23 @@ export default function AddSong() {
   const [song_artist, setArtistname] = useState("");
   const [song_name, setSongname] = useState("");
   const [song_rating, setRating] = useState("");
-  const { username, setSection, setreload } = useAuth();
+  const { username, setReload } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (song_artist === "" || song_name === "" || song_rating === "") {
         alert("Please fill in all the blanks");
+        return;
+      }
+      if (
+        song_rating !== "1" &&
+        song_rating !== "2" &&
+        song_rating !== "3" &&
+        song_rating !== "4" &&
+        song_rating !== "5"
+      ) {
+        alert("Please enter a valid rating");
         return;
       }
       const response = await fetch(
@@ -44,7 +54,7 @@ export default function AddSong() {
       const data = await response.json();
       if (data.success) {
         console.log("Update success");
-        setreload(true);
+        setReload(true);
         setSongname("");
         setArtistname("");
         setRating("");
@@ -73,12 +83,12 @@ export default function AddSong() {
         placeholder="song_name"
         onChangeText={setSongname}
       />
-      <Text>Rating:</Text>
+      <Text>Rating(1-5):</Text>
       <TextInput
         keyboardType="numeric"
         value={song_rating.toString()}
         onChangeText={setRating}
-        maxLength={1} // Assuming rating is a single digit
+        maxLength={1}
       />
       <TouchableOpacity onPress={handleSubmit}>
         <Text>Submit</Text>
