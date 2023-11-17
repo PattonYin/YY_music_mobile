@@ -10,7 +10,7 @@ const TopBar = () => {
         <View style={styles.topbar}>
             <Logo style={styles.logo}/>
             <View style={styles.gap}/> 
-            {isLogin ? <Text>Welcome, {username}</Text> : <Text style={styles.login}>ClickHere to login</Text>}
+            {isLogin ? <Text>Welcome, {username}</Text> : <Text style={styles.login}>Click here to login</Text>}
         </View>
     );
 };

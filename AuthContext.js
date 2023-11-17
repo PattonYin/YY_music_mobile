@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 const AuthContext = React.createContext();
 
@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider(props){
   const [username, setUsername] = useState(null);
   const [isLogin, setLogin] = useState(false);
-  const [currentSection, setSection] = useState('Create Review');
+  const [currentSection, setSection] = useState('Login');
 
   const value = {
     username,

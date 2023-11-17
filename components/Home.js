@@ -55,6 +55,7 @@ export default function Home() {
     const [isLoading, setLoading] = useState(true);
     const [songs, setSongs] = useState([]);
     const { currentSection, setSection } = useAuth();
+    // const [toberender, setrender ] = useState(currentSection);
 
     const panResponder = useRef(PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -73,8 +74,42 @@ export default function Home() {
         },
     })).current;
 
+    // useEffect(() => {  
+    //     switch(currentSection) {
+    //         case "Create Review":
+    //             setrender(<AddSong/>);
+    //             break;
+    //         case "Graph":
+    //             setrender(<Text>Graph</Text>);
+    //             break;
+    //         case "Login":
+    //             setrender(<Login/>);
+    //             break;
+    //         default:
+    //             setrender(<Login/>);
+    //             break;
+    //     }
+    // }, [currentSection]);
+
+    function renderSection() {
+        switch(currentSection) {
+            case "Create Review":
+                return <AddSong/>;
+                break;
+            case "Graph":
+                return <Text>Graph</Text>;
+                break;
+            case "Login":
+                return <Login/>;
+                break;
+            default:
+                return <Login/>;
+                break;
+        }
+    }
+
     useEffect(() => {
-        fetch("http://localhost/YY_Music_JS/backend/index.php?action=getRatings", {
+        fetch("http://172.21.48.189/YY_Music_JS/backend/index.php?action=getRatings", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         })
@@ -99,9 +134,7 @@ export default function Home() {
                 <TopBar/>
             </View>    
             <View {...panResponder.panHandlers} style={styles.main}>
-                {/* {(currentSection == "Create Review") ? <AddSong/> : <Text>Graph</Text>} */}
-                {/* <AddSong/> */}
-                <Login/>
+                {renderSection()}
             </View>
             <View style={styles.list}>
                 {isLoading ? (
@@ -129,10 +162,4 @@ export default function Home() {
             </View>
         </View>
     );
-
-    // return(
-    //     <View>
-    //         <AddSong/>
-    //     </View>
-    // );
 }
