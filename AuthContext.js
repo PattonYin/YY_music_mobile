@@ -13,6 +13,7 @@ export function AuthProvider(props) {
   const [isLogin, setLogin] = useState(false);
   const [currentSection, setSection] = useState("Login");
   const [reload, setReload] = useState(false);
+  const [updateInfo, setUpdate] = useState(null);
 
   const value = {
     username,
@@ -23,6 +24,8 @@ export function AuthProvider(props) {
     setSection,
     reload,
     setReload,
+    updateInfo,
+    setUpdate,
   };
 
   return (
