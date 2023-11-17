@@ -58,7 +58,7 @@ export default function UpdateSong() {
         console.log("Update success");
         setReload((prev) => !prev);
         setUpdate(null);
-        setSection("Create Review");
+        setSection("viewSong");
       } else {
         console.log(data.message);
         alert("Update fail failed");
