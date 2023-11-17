@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 function Logo() {
-    return (
-        <View>
-            <Text style={styles.logo}>Logo</Text>
-        </View>
-    );
+  return (
+    <View>
+      <Text style={styles.logo}>Logo</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    logo: {
-        padding: 5,
-    },
+  logo: {
+    padding: 5,
+  },
 });
 
 export default Logo;
