@@ -4,6 +4,7 @@ import TopBar from './top_bar';
 import AddSong from "./add_song";
 import { useAuth } from "../AuthContext";
 import Login from "./login";
+import Register from "./register";
 
 // Data: Fetch data from the backend
 // Basic UI: 
@@ -101,6 +102,9 @@ export default function Home() {
                 break;
             case "Login":
                 return <Login/>;
+                break;
+            case "Register": 
+                return <Register/>;
                 break;
             default:
                 return <Login/>;
