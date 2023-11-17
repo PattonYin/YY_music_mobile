@@ -69,6 +69,41 @@ export default function UpdateSong() {
     }
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    console.log(id);
+    console.log(username);
+    try {
+      const response = await fetch(
+        "http://172.21.48.189/YY_Music_JS/backend/index.php?action=deleteSong",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, username: song_username }),
+        }
+      );
+
+      const data = await response.json();
+      if (data.success) {
+        setReload((prev) => !prev);
+        setUpdate(null);
+        alert("Review deteled");
+        setSection("Create Review");
+      } else {
+        alert("delete failed, you can only delete your own review");
+        setUpdate(null);
+        setSection("Create Review");
+      }
+    } catch (error) {
+      console.error(
+        "There was a problem with the fetch operation:",
+        error.message
+      );
+      console.log(error);
+      alert("Song delete failed due to a network or server issue.");
+    }
+  };
+
   return (
     <View>
       <Text>Update Review</Text>
@@ -95,6 +130,14 @@ export default function UpdateSong() {
       <TouchableOpacity onPress={handleSubmit}>
         <Text>Submit</Text>
       </TouchableOpacity>
+      {song_username == username ? (
+        <TouchableOpacity onPress={handleDelete}>
+          <Text>Delete</Text>
+        </TouchableOpacity>
+      ) : (
+        <View></View>
+      )}
+
       <TouchableOpacity
         onPress={() => {
           setSection("Create Review");
