@@ -145,7 +145,6 @@ export default function Home() {
     <View style={{ flex: 1, padding: 24 }}>
       <View style={styles.header}>
         <TopBar />
-        <Text>Loading...</Text>
       </View>
       <View {...panResponder.panHandlers} style={styles.main}>
         {renderSection()}

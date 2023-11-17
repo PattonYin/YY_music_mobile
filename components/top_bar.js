@@ -4,17 +4,28 @@ import { useAuth } from '../AuthContext';
 import Logo from './logo';
 
 const TopBar = () => {
-    const { username, isLogin, setSection } = useAuth();
+    const { username, setUsername, isLogin, setLogin ,setSection } = useAuth();
+
+    const handleLogout = () => {
+        setUsername(null);
+        setLogin(false);
+        setSection('Login');
+    }
 
     return (
         <View style={styles.topbar}>
             <Logo style={styles.logo}/>
             <View style={styles.gap}/> 
             {isLogin ? 
-                <Text style={styles.login}>Welcome, {username}</Text> 
+                <View>
+                    <Text style={styles.login}>Welcome, {username}</Text> 
+                    <TouchableOpacity style={styles.button} onPress={handleLogout}>
+                        <Text style={styles.buttonText}> Logout </Text>
+                    </TouchableOpacity>
+                </View>
                 : 
                 <TouchableOpacity style={styles.button} onPress={() => {setSection('Register')}}>
-                    <Text style={styles.buttonText}>Register</Text>
+                    <Text style={styles.buttonText}> Register </Text>
                 </TouchableOpacity>}
         </View>
     );

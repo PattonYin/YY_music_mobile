@@ -1,6 +1,9 @@
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { useAuth } from '../AuthContext';
 
 export default function Register() {
+    
+    const { setSection } = useAuth();
 
     const styles = StyleSheet.create({
         button: {
@@ -11,16 +14,16 @@ export default function Register() {
           },
         buttonText: {
             color: "#fff",
-            fontSize: 10,
+            fontSize: 20,
         },
     });
 
     return (
         <View>
             <Text>Already have an account? Click here to login!</Text>
-            <TouchableOpacity style={styles.button} onPress={() => {setSection('Login')}}>
-                <Text style={styles.buttonText}> Login </Text>
-            </TouchableOpacity>
+            <View>
+                <Text style={styles.buttonText} onPress={() => {setSection('Login')}}> Login </Text>
+            </View>
         </View>
     );
 }
