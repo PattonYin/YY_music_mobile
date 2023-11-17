@@ -87,6 +87,7 @@ export default function Home() {
       <View style={styles.header}>
         <TopBar />
       </View>
+      <View style={styles.main}>{renderSection()}</View>
       <View style={styles.list}>
         <ViewSong />
       </View>

@@ -13,7 +13,7 @@ export function AuthProvider(props) {
   const [isLogin, setLogin] = useState(false);
   const [currentSection, setSection] = useState("Login");
   const [reload, setReload] = useState(false);
-  const [updateInfo, setUpdate] = useState(null);
+  const [updateInfo, setUpdate] = useState({});
 
   const value = {
     username,
