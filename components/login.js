@@ -42,7 +42,7 @@ export default function Login() {
       if (data.success) {
         setUsername(localUsername);
         setLogin(true);
-        setSection("Create Review");
+        setSection("viewSong");
         setMessage("login success");
       } else {
         setMessage("Login failed," + data.message);

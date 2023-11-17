@@ -88,11 +88,11 @@ export default function UpdateSong() {
         setReload((prev) => !prev);
         setUpdate(null);
         alert("Review deteled");
-        setSection("Create Review");
+        setSection("viewSong");
       } else {
         alert("delete failed, you can only delete your own review");
         setUpdate(null);
-        setSection("Create Review");
+        setSection("viewSong");
       }
     } catch (error) {
       console.error(
@@ -148,7 +148,7 @@ export default function UpdateSong() {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setSection("Create Review");
+          setSection("viewSong");
         }}
       >
         <Text style={styles.buttonText}>Back to Lobby</Text>

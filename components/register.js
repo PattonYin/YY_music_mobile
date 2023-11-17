@@ -46,7 +46,7 @@ export default function Register() {
       if (data.success) {
         Alert.alert("Registration successful, please login");
         setLogin(true);
-        setSection("Home"); // Navigate to the Home section after successful registration
+        setSection("viewSong");
       } else {
         setMessage(data.message);
       }
