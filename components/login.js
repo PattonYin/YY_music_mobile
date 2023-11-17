@@ -27,7 +27,7 @@ export default function Login() {
 
             const data = await response.json();
             if (data.success) {
-                setUsername({localUsername});
+                setUsername(localUsername);
                 setLogin(true);
                 setSection("Create Review");
                 alert("login success");
