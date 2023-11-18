@@ -80,8 +80,9 @@ const styles = StyleSheet.create({
     width: 320,
   },
   main: {
-    height: 380,
-    backgroundColor: "#fff",
+    height: 800,
+    width: 380,
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     width: 320,
   },

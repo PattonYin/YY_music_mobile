@@ -115,7 +115,7 @@ export default function UpdateSong() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Update or View Review</Text>
+      <Text style={styles.header}>Update or View</Text>
       <Text style={styles.subHeader}>
         You can update this review if you are the user who create it.
       </Text>
