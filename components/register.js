@@ -31,7 +31,7 @@ export default function Register() {
       setMessage("Passwords do not match.");
       return;
     }
-
+    // Send POST request to backend
     try {
       const response = await fetch(
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=register",
@@ -85,7 +85,7 @@ export default function Register() {
       {message !== "" && <Text style={styles.message}>{message}</Text>}
       <TouchableOpacity
         onPress={() => {
-          setSection("Login"); // Assuming setSection is a method to navigate to different screens
+          setSection("Login"); // Navigate to the Login section
         }}
       >
         <Text style={styles.loginText}>

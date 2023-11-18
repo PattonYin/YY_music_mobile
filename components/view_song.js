@@ -11,8 +11,7 @@ import { useAuth } from "../AuthContext";
 export default function ViewSong() {
   const [isLoading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
-  const { isLogin, setSection, reload, setReload, updateInfo, setUpdate } =
-    useAuth();
+  const { isLogin, setSection, setUpdate } = useAuth();
 
   function handleView(item) {
     setSection("updateSong");
@@ -25,7 +24,7 @@ export default function ViewSong() {
       category: item.category,
     });
   }
-
+  // Fetch data from backend
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,6 +54,7 @@ export default function ViewSong() {
     fetchData();
   }, []);
 
+  // SongCard component to display each song
   const SongCard = ({ song, artist, rating, username, category, onPress }) => (
     <TouchableOpacity onPress={onPress} style={styles.card}>
       <Text style={styles.title}>{song}</Text>
@@ -66,6 +66,7 @@ export default function ViewSong() {
     </TouchableOpacity>
   );
 
+  // Display loading message while fetching data
   return isLoading ? (
     <Text>Loading...</Text>
   ) : (

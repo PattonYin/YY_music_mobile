@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useAuth } from "../AuthContext";
-import { TouchableHighlight } from "react-native-web";
 
 export default function Login() {
   const { setUsername, setLogin, setSection } = useAuth();
@@ -15,6 +14,7 @@ export default function Login() {
   const [localPassword, setLocalPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  // make sure the user has filled in both fields
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -23,6 +23,7 @@ export default function Login() {
         return;
       }
 
+      // Send POST request to backend
       const response = await fetch(
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=login",
         {
@@ -93,6 +94,7 @@ export default function Login() {
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",

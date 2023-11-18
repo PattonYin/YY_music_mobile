@@ -14,12 +14,14 @@ export default function AddSong() {
   const [song_name, setSongname] = useState("");
   const [song_rating, setRating] = useState("");
   const [song_category, setCategory] = useState("undefined");
-  const { username, setReload, setSection, categories } = useAuth();
+  const { username, setSection, categories } = useAuth();
+  // load categories from AuthContext.js
   const pickerItems = categories.map((category) => ({
     label: category,
     value: category,
   }));
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,6 +39,7 @@ export default function AddSong() {
         alert("Please enter a valid rating");
         return;
       }
+      // Send POST request to backend
       const response = await fetch(
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=createSong",
         {
@@ -61,7 +64,6 @@ export default function AddSong() {
       const data = await response.json();
       if (data.success) {
         console.log("Update success");
-        setReload(true);
         setSongname("");
         setArtistname("");
         setRating("");
