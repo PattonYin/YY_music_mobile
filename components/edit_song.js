@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useAuth } from "../AuthContext";
+import RNPickerSelect from "react-native-picker-select";
 
 export default function UpdateSong() {
   const [song_artist, setArtistname] = useState("");
@@ -14,8 +15,14 @@ export default function UpdateSong() {
   const [song_rating, setRating] = useState("");
   const [song_username, setSongUsername] = useState("");
   const [id, setSongId] = useState("");
-  const { username, setSection, setReload, updateInfo, setUpdate } = useAuth();
-
+  const [song_category, setCategory] = useState("undefined");
+  const { username, setSection, setReload, updateInfo, setUpdate, categories } =
+    useAuth();
+  const pickerItems = categories.map((category) => ({
+    label: category,
+    value: category,
+  }));
+  //console.log(pickerItems);
   useEffect(() => {
     if (updateInfo) {
       setArtistname(updateInfo.artist);
@@ -23,6 +30,7 @@ export default function UpdateSong() {
       setRating(updateInfo.rating);
       setSongUsername(updateInfo.username);
       setSongId(updateInfo.id);
+      setCategory(updateInfo.category);
       console.log("song info updated");
     }
   }, [updateInfo]);
@@ -45,6 +53,7 @@ export default function UpdateSong() {
             song_artist: song_artist,
             song_name,
             song_rating,
+            song_category,
           }),
         }
       );
@@ -106,9 +115,10 @@ export default function UpdateSong() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Update Review</Text>
-      <Text style={styles.subHeader}>Here you can update your review.</Text>
-
+      <Text style={styles.header}>Update or View</Text>
+      <Text style={styles.subHeader}>
+        You can update this review if you are the user who create it.
+      </Text>
       <Text style={styles.label}>Artist:</Text>
       <TextInput
         style={styles.input}
@@ -116,7 +126,6 @@ export default function UpdateSong() {
         placeholder="Enter artist name"
         onChangeText={setArtistname}
       />
-
       <Text style={styles.label}>Song:</Text>
       <TextInput
         style={styles.input}
@@ -124,7 +133,6 @@ export default function UpdateSong() {
         placeholder="Enter song name"
         onChangeText={setSongname}
       />
-
       <Text style={styles.label}>Rating:</Text>
       <TextInput
         style={styles.input}
@@ -134,17 +142,24 @@ export default function UpdateSong() {
         onChangeText={setRating}
         maxLength={1}
       />
+      <Text>Category:</Text>
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
-
+      <RNPickerSelect
+        onValueChange={(value) => setCategory(value)}
+        items={pickerItems}
+        placeholder={{ label: "Select a category", value: updateInfo.category }}
+        //make sure the placeholder is the original category//
+      />
+      {song_username === username && (
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      )}
       {song_username === username && (
         <TouchableOpacity style={styles.button} onPress={handleDelete}>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       )}
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => {

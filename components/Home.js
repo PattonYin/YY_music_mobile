@@ -75,14 +75,14 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 40,
-    backgroundColor: "#95cef0",
+    height: 60,
     borderRadius: 10,
     width: 320,
   },
   main: {
-    height: 380,
-    backgroundColor: "#fff",
+    height: 800,
+    width: 380,
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     width: 320,
   },

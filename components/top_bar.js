@@ -31,8 +31,6 @@ export default function TopBar() {
           <Text style={styles.buttonText}> Register </Text>
         </TouchableOpacity>
       );
-    } else if (currentSection == "Register") {
-      return <Text> 大笨蛋 </Text>;
     } else {
       return (
         <TouchableOpacity
@@ -50,10 +48,12 @@ export default function TopBar() {
   return (
     <View style={styles.topbar}>
       <Logo style={styles.logo} />
-      <View style={styles.gap} />
+      {/*Avoid too long username*/}
+      <Text numberOfLines={1} ellipsizeMode="tail" style={styles.login}>
+        Welcome {username}
+      </Text>
       {isLogin ? (
         <View>
-          <Text style={styles.login}>Welcome, {username}</Text>
           <TouchableOpacity style={styles.button} onPress={handleLogout}>
             <Text style={styles.buttonText}> Logout </Text>
           </TouchableOpacity>
@@ -68,24 +68,36 @@ export default function TopBar() {
 const styles = StyleSheet.create({
   topbar: {
     flexDirection: "row",
+    justifyContent: "flex-start", // Align items to the start
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingLeft: 30, // BY giving the padding on left, we make space for back button
+    backgroundColor: "#ffffff",
   },
   logo: {
-    flex: 1,
-  },
-  gap: {
-    flex: 3,
+    width: 100,
+    resizeMode: "contain",
   },
   login: {
-    flex: 1,
+    flex: 1, // Take up all the space in the header
+    fontSize: 14,
+    color: "#333333",
+    fontWeight: "bold",
+    textAlign: "center", // Center the welcome text
+    marginHorizontal: 8, // Add horizontal margin to avoid touching the logo and button
   },
   button: {
-    flex: 1,
+    width: 80,
+    height: 30,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 4,
     backgroundColor: "#4a90e2",
-    paddingHorizontal: 2,
-    borderRadius: 2,
   },
   buttonText: {
     color: "#fff",
-    fontSize: 10,
+    fontSize: 12,
+    textAlign: "center",
+    fontWeight: "500",
   },
 });
