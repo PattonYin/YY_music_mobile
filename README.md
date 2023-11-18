@@ -67,7 +67,13 @@ Before you begin, ensure you have met the following requirements:
   npm start
   ```
 
-  **After setting up all this, you will be able to run our web locally!**
+  **After setting up all this, you will be able to run our web locally!**\
+
+## Additional Features
+
+### The Search Function
+
+- The user can search for specific songs, ratings, artists, categories, and users. The search function is implemented in the frontend.
 
 ## MVC architecture & REST API
 
