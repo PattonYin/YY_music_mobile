@@ -71,8 +71,17 @@ export default function Login() {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+      <Text
+        style={styles.loginText}
+        onPress={() => {
+          setSection("Register");
+        }}
+      >
+        Don't have a account? Click here to register!
+      </Text>
 
       <Text
+        style={styles.loginText}
         onPress={() => {
           setSection("viewSong");
         }}
