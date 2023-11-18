@@ -7,12 +7,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useAuth } from "../AuthContext";
+import RNPickerSelect from "react-native-picker-select";
 
 export default function AddSong() {
   const [song_artist, setArtistname] = useState("");
   const [song_name, setSongname] = useState("");
   const [song_rating, setRating] = useState("");
-  const { username, setReload, setSection } = useAuth();
+  const [song_category, setCategory] = useState("undefined");
+  const { username, setReload, setSection, categories } = useAuth();
+  const pickerItems = categories.map((category) => ({
+    label: category,
+    value: category,
+  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +47,7 @@ export default function AddSong() {
             song_artist,
             song_name,
             song_rating,
+            song_category,
           }),
         }
       );
@@ -58,6 +65,7 @@ export default function AddSong() {
         setSongname("");
         setArtistname("");
         setRating("");
+        setCategory("undefined");
         setSection("viewSong");
       } else {
         console.log(data.message);
@@ -90,6 +98,12 @@ export default function AddSong() {
         value={song_rating.toString()}
         onChangeText={setRating}
         maxLength={1}
+      />
+      <Text>Category:</Text>
+      <RNPickerSelect
+        onValueChange={(value) => setCategory(value)}
+        items={pickerItems}
+        placeholder={{ label: "Select a category", value: "undefined" }}
       />
       <TouchableOpacity onPress={handleSubmit}>
         <Text>Submit</Text>

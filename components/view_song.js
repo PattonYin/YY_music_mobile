@@ -15,6 +15,7 @@ export default function ViewSong() {
       rating: item.rating,
       username: item.username,
       id: item.id,
+      category: item.category,
     });
   }
 
@@ -74,7 +75,9 @@ export default function ViewSong() {
                 " | " +
                 item.rating +
                 " | " +
-                item.username}
+                item.username +
+                " | " +
+                item.category}
             </Text>
           </TouchableOpacity>
         )}

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useAuth } from "../AuthContext";
+import RNPickerSelect from "react-native-picker-select";
 
 export default function UpdateSong() {
   const [song_artist, setArtistname] = useState("");
@@ -14,7 +15,13 @@ export default function UpdateSong() {
   const [song_rating, setRating] = useState("");
   const [song_username, setSongUsername] = useState("");
   const [id, setSongId] = useState("");
-  const { username, setSection, setReload, updateInfo, setUpdate } = useAuth();
+  const [song_category, setCategory] = useState("undefined");
+  const { username, setSection, setReload, updateInfo, setUpdate, categories } =
+    useAuth();
+  const pickerItems = categories.map((category) => ({
+    label: category,
+    value: category,
+  }));
 
   useEffect(() => {
     if (updateInfo) {
@@ -23,6 +30,7 @@ export default function UpdateSong() {
       setRating(updateInfo.rating);
       setSongUsername(updateInfo.username);
       setSongId(updateInfo.id);
+      setCategory(updateInfo.category);
       console.log("song info updated");
     }
   }, [updateInfo]);
@@ -45,6 +53,7 @@ export default function UpdateSong() {
             song_artist: song_artist,
             song_name,
             song_rating,
+            song_category,
           }),
         }
       );
@@ -133,6 +142,13 @@ export default function UpdateSong() {
         placeholder="Enter rating"
         onChangeText={setRating}
         maxLength={1}
+      />
+
+      <Text>Category:</Text>
+      <RNPickerSelect
+        onValueChange={(value) => setCategory(value)}
+        items={pickerItems}
+        placeholder={{ label: "Select a category", value: "undefined" }}
       />
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>

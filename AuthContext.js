@@ -14,6 +14,18 @@ export function AuthProvider(props) {
   const [currentSection, setSection] = useState("Login");
   const [reload, setReload] = useState(false);
   const [updateInfo, setUpdate] = useState({});
+  const categories = [
+    "rock",
+    "jazz",
+    "classical",
+    "hip-hop",
+    "electronic",
+    "country",
+    "blues",
+    "pop",
+    "folk",
+    "undefined",
+  ];
 
   const value = {
     username,
@@ -26,6 +38,7 @@ export function AuthProvider(props) {
     setReload,
     updateInfo,
     setUpdate,
+    categories,
   };
 
   return (
