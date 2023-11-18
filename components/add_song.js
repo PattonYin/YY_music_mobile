@@ -41,6 +41,8 @@ export default function AddSong() {
       }
       // Send POST request to backend
       const response = await fetch(
+        // Make sure you change the IP address to your backend server IP,
+        // and change the file path to your backend path
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=createSong",
         {
           method: "POST",
