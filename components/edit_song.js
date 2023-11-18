@@ -22,7 +22,7 @@ export default function UpdateSong() {
     label: category,
     value: category,
   }));
-
+  //console.log(pickerItems);
   useEffect(() => {
     if (updateInfo) {
       setArtistname(updateInfo.artist);
@@ -115,9 +115,10 @@ export default function UpdateSong() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Update Review</Text>
-      <Text style={styles.subHeader}>Here you can update your review.</Text>
-
+      <Text style={styles.header}>Update or View Review</Text>
+      <Text style={styles.subHeader}>
+        You can update this review if you are the user who create it.
+      </Text>
       <Text style={styles.label}>Artist:</Text>
       <TextInput
         style={styles.input}
@@ -125,7 +126,6 @@ export default function UpdateSong() {
         placeholder="Enter artist name"
         onChangeText={setArtistname}
       />
-
       <Text style={styles.label}>Song:</Text>
       <TextInput
         style={styles.input}
@@ -133,7 +133,6 @@ export default function UpdateSong() {
         placeholder="Enter song name"
         onChangeText={setSongname}
       />
-
       <Text style={styles.label}>Rating:</Text>
       <TextInput
         style={styles.input}
@@ -143,24 +142,24 @@ export default function UpdateSong() {
         onChangeText={setRating}
         maxLength={1}
       />
-
       <Text>Category:</Text>
+
       <RNPickerSelect
         onValueChange={(value) => setCategory(value)}
         items={pickerItems}
-        placeholder={{ label: "Select a category", value: "undefined" }}
+        placeholder={{ label: "Select a category", value: updateInfo.category }}
+        //make sure the placeholder is the original category//
       />
-
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
-
+      {song_username === username && (
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      )}
       {song_username === username && (
         <TouchableOpacity style={styles.button} onPress={handleDelete}>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       )}
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => {

@@ -5,7 +5,8 @@ import { useAuth } from "../AuthContext";
 export default function ViewSong() {
   const [isLoading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
-  const { setSection, reload, setReload, updateInfo, setUpdate } = useAuth();
+  const { isLogin, setSection, reload, setReload, updateInfo, setUpdate } =
+    useAuth();
 
   function handleView(item) {
     setSection("updateSong");
@@ -60,9 +61,15 @@ export default function ViewSong() {
       <Text style={{ fontSize: 18, color: "green", textAlign: "center" }}>
         YY_Music
       </Text>
-      <TouchableOpacity onPress={() => setSection("Create Review")}>
-        <Text>Add Song</Text>
-      </TouchableOpacity>
+
+      {
+        // If the user is not logged in, do not show the Add Song button.
+        isLogin === true && (
+          <TouchableOpacity onPress={() => setSection("Create Review")}>
+            <Text>Add Song</Text>
+          </TouchableOpacity>
+        )
+      }
       <FlatList
         data={songs}
         keyExtractor={(item) => item.id.toString()}

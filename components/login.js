@@ -79,7 +79,6 @@ export default function Login() {
       >
         Click here to check the reviews without loggin in
       </Text>
-
       {message !== "" && <Text style={styles.message}>{message}</Text>}
     </View>
   );
