@@ -141,4 +141,23 @@ class UserController extends BaseController
       $this->jsonResponse(['success' => false, 'message' => 'song already exist']);
     }
   }
+
+  public function getCateNum()
+  {
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+    $categories = $data['categories'];
+
+    $db = new Database();
+    $userModel = new UserModel($db);
+
+    foreach ($categories as $category) {
+        $count = $userModel->getCategoryCount($category);
+        $categoryCounts[$category] = $count;
+    }
+
+    $this->jsonResponse($categoryCounts);
+
+    $db->closeConnection();
+  }
 }

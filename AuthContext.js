@@ -25,6 +25,7 @@ export function AuthProvider(props) {
     "folk",
     "undefined",
   ];
+  const [statsData, setStatsData] = useState([]);
 
   const value = {
     username,
@@ -36,6 +37,8 @@ export function AuthProvider(props) {
     updateInfo,
     setUpdate,
     categories,
+    statsData,
+    setStatsData,
   };
 
   return (

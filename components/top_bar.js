@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../AuthContext";
 import Logo from "./logo";
@@ -11,7 +11,65 @@ export default function TopBar() {
     setLogin,
     currentSection,
     setSection,
+    categories,
+    statsData,
+    setStatsData,
   } = useAuth();
+
+  const fetchData = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "http://172.21.48.189/YY_Music_JS/backend/index.php?action=getCateNum",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ categories }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok (getCateNum)");
+      }
+      const backendData = await response.json();
+
+      // Map the categories to include the count from the backend data
+      const dataWithCounts = categories.map((cate) => ({
+        category: cate,
+        count: backendData[cate] || 0, // Default to 0 if the category is not found
+      }));
+
+      setStatsData(dataWithCounts);
+      setSection("Graph");
+      console.log(statsData);
+    } catch (error) {
+      console.error(
+        "There was a problem with the fetch operation (getCateNum):",
+        error.message
+      );
+      alert("Failed due to a network or server issue (getCateNum). ");
+    } finally {
+    }
+  };
+
+  function renderButton() {
+    if (currentSection !== "Graph") {
+      return (
+        <TouchableOpacity onPress={fetchData}>
+          <Text> Statistics </Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSection("viewSong");
+          }}
+        >
+          <Text> Back to Lobby </Text>
+        </TouchableOpacity>
+      );
+    }
+  }
 
   const handleLogout = () => {
     setUsername(null);
@@ -47,7 +105,7 @@ export default function TopBar() {
 
   return (
     <View style={styles.topbar}>
-      <Logo style={styles.logo} />
+      <View style={styles.logo}>{renderButton()}</View>
       {/*Avoid too long username*/}
       <Text numberOfLines={1} ellipsizeMode="tail" style={styles.login}>
         Welcome {username}

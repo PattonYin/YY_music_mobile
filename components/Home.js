@@ -7,6 +7,8 @@ import Login from "./login";
 import Register from "./register";
 import ViewSong from "./view_song";
 import UpdateSong from "./edit_song";
+import TestFetch from "./testFetch";
+import Chart from "./stats";
 
 // Data: Fetch data from the backend
 // Basic UI:
@@ -44,7 +46,7 @@ export default function Home() {
       case "Create Review":
         return <AddSong />;
       case "Graph":
-        return <Text>Graph</Text>;
+        return <Chart />;
       case "Login":
         return <Login />;
       case "Register":
