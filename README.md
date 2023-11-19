@@ -31,6 +31,7 @@ Before you begin, ensure you have met the following requirements:
 
   ```bash
   npm install react-native-picker-select
+  npm install --save victory-native
   ```
 
 ### Running the app
