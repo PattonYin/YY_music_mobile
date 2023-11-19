@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { Text, View, StyleSheet } from "react-native";
 import TopBar from "./top_bar";
 import AddSong from "./add_song";
 import { useAuth } from "../AuthContext";
 import Login from "./login";
 import Register from "./register";
-import { TouchableOpacity } from "react-native-web";
 import ViewSong from "./view_song";
 import UpdateSong from "./edit_song";
 import TestFetch from "./testFetch";
@@ -39,10 +38,9 @@ import Chart from "./stats";
 // 4. Login logout logica
 
 export default function Home() {
-  const [isLoading, setLoading] = useState(true);
-  const [songs, setSongs] = useState([]);
-  const { currentSection, setSection, reload, setReload } = useAuth();
+  const { currentSection } = useAuth();
 
+  // Function to render different sections
   function renderSection() {
     switch (currentSection) {
       case "Create Review":
@@ -67,18 +65,12 @@ export default function Home() {
       <View style={styles.header}>
         <TopBar />
       </View>
-      {/* <View style={styles.main}>
-        <TestFetch />
-      </View> */}
       <View style={styles.main}>{renderSection()}</View>
-      {/* <View style={styles.main}>
-        <Chart />
-        <ChartPie />
-      </View> */}
     </View>
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   header: {
     height: 60,
@@ -86,7 +78,7 @@ const styles = StyleSheet.create({
     width: 320,
   },
   main: {
-    height: 800,
+    height: 700,
     width: 380,
     backgroundColor: "#ffffff",
     borderRadius: 10,

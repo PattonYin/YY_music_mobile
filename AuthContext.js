@@ -12,7 +12,6 @@ export function AuthProvider(props) {
   const [username, setUsername] = useState(null);
   const [isLogin, setLogin] = useState(false);
   const [currentSection, setSection] = useState("Login");
-  const [reload, setReload] = useState(false);
   const [updateInfo, setUpdate] = useState({});
   const categories = [
     "rock",
@@ -35,8 +34,6 @@ export function AuthProvider(props) {
     setLogin,
     currentSection,
     setSection,
-    reload,
-    setReload,
     updateInfo,
     setUpdate,
     categories,

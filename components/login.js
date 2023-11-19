@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useAuth } from "../AuthContext";
-import { TouchableHighlight } from "react-native-web";
 
 export default function Login() {
   const { setUsername, setLogin, setSection } = useAuth();
@@ -15,6 +14,7 @@ export default function Login() {
   const [localPassword, setLocalPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  // make sure the user has filled in both fields
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -23,7 +23,10 @@ export default function Login() {
         return;
       }
 
+      // Send POST request to backend
       const response = await fetch(
+        // Make sure you change the IP address to your backend server IP,
+        // and change the file path to your backend path
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=login",
         {
           method: "POST",
@@ -71,8 +74,17 @@ export default function Login() {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+      <Text
+        style={styles.loginText}
+        onPress={() => {
+          setSection("Register");
+        }}
+      >
+        Don't have a account? Click here to register!
+      </Text>
 
       <Text
+        style={styles.loginText}
         onPress={() => {
           setSection("viewSong");
         }}
@@ -84,6 +96,7 @@ export default function Login() {
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
@@ -105,7 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "#4a90e2",
+    backgroundColor: "#333333",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,

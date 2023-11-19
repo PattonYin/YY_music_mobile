@@ -5,14 +5,15 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  TextInput,
 } from "react-native";
 import { useAuth } from "../AuthContext";
 
 export default function ViewSong() {
   const [isLoading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
-  const { isLogin, setSection, reload, setReload, updateInfo, setUpdate } =
-    useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isLogin, setSection, setUpdate } = useAuth();
 
   function handleView(item) {
     setSection("updateSong");
@@ -55,6 +56,20 @@ export default function ViewSong() {
     fetchData();
   }, []);
 
+  function handleSearch(term) {
+    setSearchTerm(term);
+  }
+
+  // Filter the songs based on the search term
+  const filteredSongs = songs.filter(
+    (song) =>
+      song.song.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      song.artist.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      song.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      song.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      song.rating.toString().includes(searchTerm.toLowerCase())
+  );
+
   const SongCard = ({ song, artist, rating, username, category, onPress }) => (
     <TouchableOpacity onPress={onPress} style={styles.card}>
       <Text style={styles.title}>{song}</Text>
@@ -71,6 +86,12 @@ export default function ViewSong() {
   ) : (
     <View style={styles.container}>
       <Text style={styles.header}>YY_Music</Text>
+      <TextInput
+        style={styles.searchBox}
+        placeholder="Search for songs, artists, cat., or users"
+        value={searchTerm}
+        onChangeText={handleSearch}
+      />
       {isLogin === true && (
         <TouchableOpacity
           onPress={() => setSection("Create Review")}
@@ -79,9 +100,8 @@ export default function ViewSong() {
           <Text style={styles.addButtonText}>Add Song</Text>
         </TouchableOpacity>
       )}
-
       <FlatList
-        data={songs}
+        data={filteredSongs}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <SongCard
@@ -143,7 +163,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   addButton: {
-    backgroundColor: "black",
+    backgroundColor: "#333333",
     padding: 10,
     marginHorizontal: 100,
     borderRadius: 10,
@@ -151,5 +171,16 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: "white",
     textAlign: "center",
+  },
+  searchBox: {
+    height: 40,
+    width: "89%",
+    borderColor: "gray",
+    borderWidth: 1,
+    marginLeft: 17,
+    marginBottom: 20,
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
   },
 });
