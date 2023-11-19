@@ -70,6 +70,7 @@ export default function Login() {
         value={localPassword}
         placeholder="password"
         onChangeText={setLocalPassword}
+        secureTextEntry
       />
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Login</Text>
