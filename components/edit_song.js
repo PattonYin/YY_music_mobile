@@ -16,8 +16,7 @@ export default function UpdateSong() {
   const [song_username, setSongUsername] = useState("");
   const [id, setSongId] = useState("");
   const [song_category, setCategory] = useState("undefined");
-  const { username, setSection, setReload, updateInfo, setUpdate, categories } =
-    useAuth();
+  const { username, setSection, updateInfo, setUpdate, categories } = useAuth();
   const pickerItems = categories.map((category) => ({
     label: category,
     value: category,
@@ -35,6 +34,7 @@ export default function UpdateSong() {
     }
   }, [updateInfo]);
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,6 +43,8 @@ export default function UpdateSong() {
         return;
       }
       const response = await fetch(
+        // Make sure you change the IP address to your backend server IP,
+        // and change the file path to your backend path
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=updateSong",
         {
           method: "POST",
@@ -65,8 +67,6 @@ export default function UpdateSong() {
       const data = await response.json();
       if (data.success) {
         console.log("Update success");
-        setReload((prev) => !prev);
-        setUpdate(null);
         setSection("viewSong");
       } else {
         console.log(data.message);
@@ -78,12 +78,15 @@ export default function UpdateSong() {
     }
   };
 
+  // Function to handle delete
   const handleDelete = async (e) => {
     e.preventDefault();
     console.log(id);
     console.log(username);
     try {
       const response = await fetch(
+        // Make sure you change the IP address to your backend server IP,
+        // and change the file path to your backend path
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=deleteSong",
         {
           method: "POST",
@@ -94,8 +97,6 @@ export default function UpdateSong() {
 
       const data = await response.json();
       if (data.success) {
-        setReload((prev) => !prev);
-        setUpdate(null);
         alert("Review deteled");
         setSection("viewSong");
       } else {
@@ -147,14 +148,21 @@ export default function UpdateSong() {
       <RNPickerSelect
         onValueChange={(value) => setCategory(value)}
         items={pickerItems}
-        placeholder={{ label: "Select a category", value: updateInfo.category }}
+        placeholder={{
+          label: "Select a category",
+          value: updateInfo.category,
+        }}
         //make sure the placeholder is the original category//
       />
-      {song_username === username && (
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-      )}
+
+      {
+        /*Only the user who added the song can delet or submit edition */
+        song_username === username && (
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Submit</Text>
+          </TouchableOpacity>
+        )
+      }
       {song_username === username && (
         <TouchableOpacity style={styles.button} onPress={handleDelete}>
           <Text style={styles.buttonText}>Delete</Text>
@@ -172,6 +180,7 @@ export default function UpdateSong() {
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -200,7 +209,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#333333",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 5,

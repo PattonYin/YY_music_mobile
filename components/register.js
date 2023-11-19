@@ -31,9 +31,11 @@ export default function Register() {
       setMessage("Passwords do not match.");
       return;
     }
-
+    // Send POST request to backend
     try {
       const response = await fetch(
+        // Make sure you change the IP address to your backend server IP,
+        // and change the file path to your backend path
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=register",
         {
           method: "POST",
@@ -85,7 +87,7 @@ export default function Register() {
       {message !== "" && <Text style={styles.message}>{message}</Text>}
       <TouchableOpacity
         onPress={() => {
-          setSection("Login"); // Assuming setSection is a method to navigate to different screens
+          setSection("Login"); // Navigate to the Login section
         }}
       >
         <Text style={styles.loginText}>
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "#4a90e2",
+    backgroundColor: "#333333",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,

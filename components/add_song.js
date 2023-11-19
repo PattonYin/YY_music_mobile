@@ -14,12 +14,14 @@ export default function AddSong() {
   const [song_name, setSongname] = useState("");
   const [song_rating, setRating] = useState("");
   const [song_category, setCategory] = useState("undefined");
-  const { username, setReload, setSection, categories } = useAuth();
+  const { username, setSection, categories } = useAuth();
+  // load categories from AuthContext.js
   const pickerItems = categories.map((category) => ({
     label: category,
     value: category,
   }));
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +39,10 @@ export default function AddSong() {
         alert("Please enter a valid rating");
         return;
       }
+      // Send POST request to backend
       const response = await fetch(
+        // Make sure you change the IP address to your backend server IP,
+        // and change the file path to your backend path
         "http://172.21.48.189/YY_Music_JS/backend/index.php?action=createSong",
         {
           method: "POST",
@@ -61,7 +66,6 @@ export default function AddSong() {
       const data = await response.json();
       if (data.success) {
         console.log("Update success");
-        setReload(true);
         setSongname("");
         setArtistname("");
         setRating("");
@@ -77,39 +81,46 @@ export default function AddSong() {
   };
 
   return (
-    <View>
-      <Text>Create Review</Text>
-      <Text>Here you can create your review.</Text>
-      <Text>Artist:</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Create Review</Text>
+      <Text style={styles.subHeader}>Here you can create your review.</Text>
+      <Text style={styles.label}>Artist:</Text>
       <TextInput
+        style={styles.input}
         value={song_artist}
         placeholder="artist"
         onChangeText={setArtistname}
       />
       <Text>Song:</Text>
       <TextInput
+        style={styles.input}
         value={song_name}
         placeholder="song_name"
         onChangeText={setSongname}
       />
       <Text>Rating(1-5):</Text>
       <TextInput
+        style={styles.input}
         keyboardType="numeric"
         value={song_rating.toString()}
         onChangeText={setRating}
         maxLength={1}
       />
-      <Text>Category:</Text>
+      <Text style={styles.label}>Category:</Text>
       <RNPickerSelect
+        style={styles.label}
         onValueChange={(value) => setCategory(value)}
         items={pickerItems}
         placeholder={{ label: "Select a category", value: "undefined" }}
       />
-      <TouchableOpacity onPress={handleSubmit}>
-        <Text>Submit</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSection("viewSong")}>
-        <Text>Back to Lobby</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setSection("viewSong")}
+      >
+        <Text style={styles.buttonText}>Back to Lobby</Text>
       </TouchableOpacity>
     </View>
   );
@@ -119,9 +130,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "left",
-    justifyContent: "left",
-    paddingBottom: 20,
-    paddingTop: 20,
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  subHeader: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "grey",
+    borderRadius: 5,
+    padding: 12,
+    marginBottom: 16,
+    fontSize: 16,
+  },
+  button: {
+    backgroundColor: "#333333",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "500",
   },
 });
