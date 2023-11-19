@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 10,
     width: 320,
+    marginTop: 30,
+    marginLeft: 10,
   },
   main: {
     height: 700,
@@ -83,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderRadius: 10,
     width: 320,
+    marginLeft: 15,
   },
   list: {
     flex: 1,

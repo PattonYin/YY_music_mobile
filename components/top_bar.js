@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start", // Align items to the start
     alignItems: "center",
     paddingVertical: 10,
-    paddingLeft: 30, // BY giving the padding on left, we make space for back button
     backgroundColor: "#ffffff",
   },
   logo: {
     width: 100,
     resizeMode: "contain",
+    marginLeft: 0,
   },
   login: {
     flex: 1, // Take up all the space in the header

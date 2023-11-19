@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "green",
     textAlign: "center",
-    marginVertical: 20,
+    marginVertical: 10,
   },
   card: {
     backgroundColor: "#fff",
