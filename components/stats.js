@@ -13,7 +13,9 @@ export default function Chart() {
   const { categories, statsData } = useAuth();
 
   return (
-    <View>
+    <View
+      style={{ height: 500, justifyContent: "center", alignItems: "center" }}
+    >
       {/* <Text onPress={fetchData}> click me</Text> */}
       <VictoryChart
         animate={{
@@ -22,6 +24,7 @@ export default function Chart() {
         }}
         polar
         width={315}
+        height={315}
       >
         <VictoryPolarAxis
           startAngle={0}
@@ -42,6 +45,10 @@ export default function Chart() {
           }}
         />
       </VictoryChart>
+      <Text></Text>
+      <Text style={{ textAlign: "center" }}>
+        Overview on Number of comments on different types of songs
+      </Text>
     </View>
   );
 }
