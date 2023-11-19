@@ -76,6 +76,10 @@ Before you begin, ensure you have met the following requirements:
 
 - The user can search for specific songs, ratings, artists, categories, and users. The search function is implemented in the frontend.
 
+### The Statistics
+
+- The user can view the statistics on the number of reviews on different categories of songs.
+
 ## MVC architecture & REST API
 
 Components Breakdown for Model and Controller:
