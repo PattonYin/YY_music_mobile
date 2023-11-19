@@ -51,21 +51,23 @@ export default function TopBar() {
     }
   };
 
+  // renders the button based on the current section
   function renderButton() {
     if (currentSection !== "Graph") {
       return (
-        <TouchableOpacity onPress={fetchData}>
-          <Text> Statistics </Text>
+        <TouchableOpacity style={styles.button} onPress={fetchData}>
+          <Text style={styles.buttonText}> Statistics </Text>
         </TouchableOpacity>
       );
     } else {
       return (
         <TouchableOpacity
+          style={styles.button}
           onPress={() => {
             setSection("viewSong");
           }}
         >
-          <Text> Back to Lobby </Text>
+          <Text style={styles.buttonText}> Back </Text>
         </TouchableOpacity>
       );
     }

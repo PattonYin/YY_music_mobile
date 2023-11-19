@@ -1,12 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import {
-  VictoryBar,
-  VictoryPolarAxis,
-  VictoryAxis,
-  VictoryChart,
-  VictoryTheme,
-} from "victory-native";
+import { VictoryBar, VictoryPolarAxis, VictoryChart } from "victory-native";
 import { useAuth } from "../AuthContext";
 
 export default function Chart() {
@@ -16,7 +10,6 @@ export default function Chart() {
     <View
       style={{ height: 500, justifyContent: "center", alignItems: "center" }}
     >
-      {/* <Text onPress={fetchData}> click me</Text> */}
       <VictoryChart
         animate={{
           duration: 1000,
@@ -27,6 +20,7 @@ export default function Chart() {
         height={315}
       >
         <VictoryPolarAxis
+          // Style the axis for the graph
           startAngle={0}
           endAngle={360}
           tickValues={categories}
@@ -37,6 +31,7 @@ export default function Chart() {
           }}
         />
         <VictoryBar
+          // Put the data into the graph
           data={statsData}
           x="category"
           y="count"
@@ -46,6 +41,7 @@ export default function Chart() {
         />
       </VictoryChart>
       <Text></Text>
+      {/* title of the graph */}
       <Text style={{ textAlign: "center" }}>
         Overview on Number of comments on different types of songs
       </Text>

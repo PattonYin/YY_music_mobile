@@ -46,7 +46,6 @@ export default function Register() {
 
       const data = await response.json();
       if (data.success) {
-        Alert.alert("Registration successful, please login");
         setLogin(true);
         setSection("viewSong");
       } else {
