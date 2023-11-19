@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
+    "@react-native-picker/picker": "2.4.10",
     "echarts": "^5.4.3",
     "expo": "~49.0.15",
     "expo-image-picker": "~14.3.2",
@@ -18,8 +19,9 @@
     "react-dom": "18.2.0",
     "react-native": "0.72.6",
     "react-native-picker-select": "^9.0.0",
+    "react-native-svg": "^14.0.0",
     "react-native-web": "~0.19.6",
-    "@react-native-picker/picker": "2.4.10"
+    "victory-native": "^36.6.12"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

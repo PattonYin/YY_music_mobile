@@ -41,4 +41,7 @@ switch ($action) {
   case 'createSong':
     $controller->createSong();
     break;
+  case 'getCateNum':
+    $controller->getCateNum();
+    break;
 }

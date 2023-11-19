@@ -141,4 +141,15 @@ class UserModel
     $query->execute();
     $query->close();
   }
+
+  public function getCategoryCount($category)
+  {
+    $query = $this->db->getConnection()->prepare("SELECT COUNT(*) FROM ratings WHERE category = ?");
+    $query->bind_param('s', $category);
+    $query->execute();
+    $result = $query->get_result();
+    $row = $result->fetch_assoc();
+    $query->close();
+    return $row['COUNT(*)'];
+  }
 }

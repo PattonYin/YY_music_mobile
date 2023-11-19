@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Text, View, StyleSheet, FlatList, PanResponder } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import TopBar from "./top_bar";
 import AddSong from "./add_song";
 import { useAuth } from "../AuthContext";
@@ -8,6 +8,8 @@ import Register from "./register";
 import { TouchableOpacity } from "react-native-web";
 import ViewSong from "./view_song";
 import UpdateSong from "./edit_song";
+import TestFetch from "./testFetch";
+import Chart from "./stats";
 
 // Data: Fetch data from the backend
 // Basic UI:
@@ -46,7 +48,7 @@ export default function Home() {
       case "Create Review":
         return <AddSong />;
       case "Graph":
-        return <Text>Graph</Text>;
+        return <Chart />;
       case "Login":
         return <Login />;
       case "Register":
@@ -65,9 +67,13 @@ export default function Home() {
       <View style={styles.header}>
         <TopBar />
       </View>
+      {/* <View style={styles.main}>
+        <TestFetch />
+      </View> */}
       <View style={styles.main}>{renderSection()}</View>
-      {/* <View style={styles.list}>
-        <ViewSong />
+      {/* <View style={styles.main}>
+        <Chart />
+        <ChartPie />
       </View> */}
     </View>
   );
