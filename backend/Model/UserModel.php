@@ -134,14 +134,6 @@ class UserModel
     $query->close();
   }
 
-  public function createSong($song_name, $user_name, $song_artist, $song_rating, $song_category)
-  {
-    $query = $this->db->getConnection()->prepare("INSERT INTO ratings (`username`, `artist`, `song`, `rating`, `category`) VALUES (?, ?, ?, ?, ?)");
-    $query->bind_param('sssis', $user_name, $song_artist, $song_name, $song_rating, $song_category);
-    $query->execute();
-    $query->close();
-  }
-
   public function getCategoryCount($category)
   {
     $query = $this->db->getConnection()->prepare("SELECT COUNT(*) FROM ratings WHERE category = ?");
@@ -151,5 +143,13 @@ class UserModel
     $row = $result->fetch_assoc();
     $query->close();
     return $row['COUNT(*)'];
+  }
+
+  public function createSong($song_name, $user_name, $song_artist, $song_rating, $song_category)
+  {
+    $query = $this->db->getConnection()->prepare("INSERT INTO ratings (`username`, `artist`, `song`, `rating`, `category`) VALUES (?, ?, ?, ?, ?)");
+    $query->bind_param('sssis', $user_name, $song_artist, $song_name, $song_rating, $song_category);
+    $query->execute();
+    $query->close();
   }
 }

@@ -152,8 +152,8 @@ class UserController extends BaseController
     $userModel = new UserModel($db);
 
     foreach ($categories as $category) {
-        $count = $userModel->getCategoryCount($category);
-        $categoryCounts[$category] = $count;
+      $count = $userModel->getCategoryCount($category);
+      $categoryCounts[$category] = $count;
     }
 
     $this->jsonResponse($categoryCounts);

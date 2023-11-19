@@ -20,6 +20,9 @@ $controller = new UserController();
 //Use a switch-case to decide which method of the controller to call 
 //based on the 'action' parameter.
 switch ($action) {
+  case 'getCateNum':
+    $controller->getCateNum();
+    break;
   case 'login':
     $controller->login();
     break;
@@ -40,8 +43,5 @@ switch ($action) {
     break;
   case 'createSong':
     $controller->createSong();
-    break;
-  case 'getCateNum':
-    $controller->getCateNum();
     break;
 }
