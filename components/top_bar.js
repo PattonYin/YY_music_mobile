@@ -20,7 +20,7 @@ export default function TopBar() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://172.21.48.189/YY_Music_JS/backend/index.php?action=getCateNum",
+        "http://172.21.48.189/YY_music_mobile/backend/index.php?action=getCateNum",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
