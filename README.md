@@ -2,8 +2,6 @@
 
 This repo contains both the frontend and backend of the YY-music mobile app.
 
-This is a mobile app development, practice for comp333 in Wesleyan University. This is a training exercise.
-
 ## How to run the app
 
 ### Pre-requisites
@@ -111,3 +109,5 @@ Components Breakdown for Model and Controller:
 ### Member Contribution
 
 Harry Yu 50% Patton Yin 50%
+
+This is a mobile app development, practice for comp333 in Wesleyan University. This is a training exercise.
