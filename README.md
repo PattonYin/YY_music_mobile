@@ -2,6 +2,19 @@
 
 This repo contains both the frontend and backend of the YY-music mobile app.
 
+### Member Contribution
+
+Harry Yu 50% Patton Yin 50%
+
+## Snapshots of the Application
+
+<img src="preview_imgs/login.png" width="200">
+<img src="preview_imgs/register.png" width="200">
+
+<img src="preview_imgs/view_song.png" width="200">
+<img src="preview_imgs/edit_song.png" width="200">
+<img src="preview_imgs/statistics.png" width="200">
+
 ## How to run the app
 
 ### Pre-requisites
@@ -106,8 +119,6 @@ Components Breakdown for Model and Controller:
     Role: Data interaction layer.
     Functionality: Executes database queries under instructions from the UserController, ensuring that data is accurately fetched, stored, updated, or deleted as per the request.
 
-### Member Contribution
-
-Harry Yu 50% Patton Yin 50%
+### Clarification
 
 This is a mobile app development, practice for comp333 in Wesleyan University. This is a training exercise.
