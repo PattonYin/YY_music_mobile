@@ -2,7 +2,7 @@
 
 This repo contains both the frontend and backend of the YY-music mobile app.
 
-### Member Contribution
+## Member Contribution
 
 Harry Yu 50% Patton Yin 50%
 
