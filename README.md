@@ -8,12 +8,13 @@ Harry Yu 50% Patton Yin 50%
 
 ## Snapshots of the Application
 
-<img src="preview_imgs/login.png" width="200">
-<img src="preview_imgs/register.png" width="200">
-
-<img src="preview_imgs/view_song.png" width="200">
-<img src="preview_imgs/edit_song.png" width="200">
-<img src="preview_imgs/statistics.png" width="200">
+<div style="display:flex; justify-content:space-between;">
+    <img src="preview_imgs/login.png" width="200">
+    <img src="preview_imgs/register.png" width="200">
+    <img src="preview_imgs/view_song.png" width="200">
+    <img src="preview_imgs/edit_song.png" width="200">
+    <img src="preview_imgs/statistics.png" width="200">
+</div>
 
 ## How to run the app
 
